@@ -137,7 +137,7 @@ for i in range(N_ORD):
     promised = prod_days + transit + 5
     delay = rng.gamma(1.4, 2.0) * (0.55 if automated_line else 1.0) \
         + (rng.gamma(2, 3) if (ship == "Sea Freight" and rng.random() < 0.12) else 0) \
-        + (3 if d.month in (12, 1) else 0) - 2.5
+        + (rng.gamma(2, 1.5) if (d.month in (12, 1) and rng.random() < 0.45) else 0) - 2.5
     actual = max(promised - 3, promised + delay)
     damage = np.clip(rng.normal(1.6 if ship == "Sea Freight" else 0.9, 0.6) * (0.75 if automated_line else 1), 0, None)
     late = actual - promised
