@@ -77,7 +77,7 @@ if page == "Overview":
     rg = o.groupby("region", as_index=False)["net_revenue_usd"].sum().sort_values("net_revenue_usd")
     c2.plotly_chart(px.bar(rg, x="net_revenue_usd", y="region", orientation="h", title="Revenue by region"), use_container_width=True)
     explain("Where our revenue comes from geographically.", "The map gives a global view for an export business; the bar chart ranks the regions exactly.",
-            "North America, the Middle East and Europe bring in most of the revenue. India (domestic) is about 12%, so this is mainly an export business.")
+            "North America, the Middle East and Europe bring in most of the revenue. India (domestic) is about 11%, so this is mainly an export business.")
 
 # ================================================================ SALES
 elif page == "Sales (descriptive)":
@@ -89,7 +89,7 @@ elif page == "Sales (descriptive)":
     c2.plotly_chart(px.bar(cat.sort_values("margin_pct"), x="margin_pct", y="tile_category", orientation="h", title="Gross margin % by category",
                            color_discrete_sequence=[PAL[2]]), use_container_width=True)
     explain("Revenue and margin for each product line.", "Comparing revenue with margin separates volume drivers from profit drivers.",
-            "Designer Mosaic and Porcelain Slab earn the most revenue and the highest margins (about 47-51%). These premium lines are what the 7D viewer and Room Visualizer should promote.")
+            "Designer Mosaic and Porcelain Slab earn the most revenue and the highest margins (about 46-52%). These premium lines are what the 7D viewer and Room Visualizer should promote.")
     seg = o.groupby("customer_type").agg(revenue=("net_revenue_usd", "sum"), aov=("net_revenue_usd", "mean"), orders=("order_id", "count")).reset_index()
     st.plotly_chart(px.scatter(seg, x="orders", y="aov", size="revenue", color="customer_type", text="customer_type",
                                title="Segments: number of orders vs average order value (bubble = revenue)"), use_container_width=True)
@@ -115,7 +115,7 @@ elif page == "Digital Experience (diagnostic)":
             + ("Significant: tool use and returns are related." if chi[1] < 0.05 else "Not significant."))
     explain("Returns, rating and order value for each level of digital engagement.",
             "Grouped comparisons with a hypothesis test are the core diagnostic tool: they show whether a difference is real or just noise.",
-            "Customers who saw their own room before buying return about 3x less often and rate us higher, because there is less 'it looked different at home' regret. "
+            "Customers who saw their own room before buying return about 3x less often (15% vs 5%) and rate us higher, because there is less 'it looked different at home' regret. "
             "Overall order value looks LOWER for tool users, which is checked below.")
     st.subheader("Simpson's paradox check: compare like with like")
     w = o.pivot_table(index="customer_type", columns="digital_engagement", values="net_revenue_usd", aggfunc="mean").reindex(columns=ENG).reset_index()
@@ -124,7 +124,7 @@ elif page == "Digital Experience (diagnostic)":
                            title="Average order value within each segment"), use_container_width=True)
     explain("Order value by tool use, split by customer segment.",
             "The overall comparison mixes segments. Homeowners (small orders) use the Visualizer most, which drags the overall average down.",
-            "Within every segment, Visualizer users spend about 20-40% MORE. The tool raises basket size; the overall drop was a segment-mix effect (Simpson's paradox).")
+            "Within every segment, Visualizer users spend about 11-40% MORE. The tool raises basket size; the overall drop was a segment-mix effect (Simpson's paradox).")
     fn = s.groupby("journey").agg(sessions=("session_id", "count"), quote=("requested_quote", "mean"), order=("placed_order", "mean")).reindex(["Browse only", "7D only", "7D + Room upload"]).reset_index()
     fnl = fn.melt(id_vars="journey", value_vars=["quote", "order"], var_name="stage", value_name="rate")
     st.plotly_chart(px.bar(fnl, x="journey", y="rate", color="stage", barmode="group", title="Website/app funnel: conversion by visitor journey"), use_container_width=True)
@@ -141,12 +141,12 @@ elif page == "Delivery & Logistics":
     st.plotly_chart(px.box(o, x="shipping_mode", y="delay_days", color="shipping_mode", points=False,
                            title="Delay vs promised date (days) by shipping mode"), use_container_width=True)
     explain("Spread of delivery delays for each shipping mode.", "A box plot shows median, spread and outliers, and the outliers are the problem here.",
-            "Sea freight has a long tail of 10-30 day delays (port congestion, missed vessels). That tail is what hurts the brand.")
+            "Sea freight has a long tail of delays of up to about 30 days (port congestion, missed vessels). That tail is what hurts the brand.")
     ot = o.groupby(["shipping_mode", "production_line_type"])["on_time"].mean().reset_index()
     st.plotly_chart(px.bar(ot, x="shipping_mode", y="on_time", color="production_line_type", barmode="group",
                            title="On-time rate: automated vs semi/manual production"), use_container_width=True)
     explain("On-time delivery split by production line type and shipping mode.", "Two-way grouping separates factory-caused from logistics-caused delays.",
-            "Orders made on fully automated lines arrive on time 15-20 points more often in every shipping mode. Factory automation is also a delivery lever.")
+            "Orders made on fully automated lines arrive on time 16-21 points more often in every shipping mode. Factory automation is also a delivery lever.")
     o2 = o.assign(delay_band=pd.cut(o.delay_days, [-10, 0, 3, 7, 14, 100], labels=["On time", "1-3", "4-7", "8-14", ">14"]))
     dr = o2.groupby("delay_band", observed=True)["customer_rating"].mean().reset_index()
     dr["delay_band"] = dr["delay_band"].astype(str)
@@ -154,7 +154,7 @@ elif page == "Delivery & Logistics":
     rho = stats.spearmanr(o.delay_days, o.customer_rating)
     st.info(f"Spearman correlation between delay and rating: rho = {rho.statistic:.2f} (p = {rho.pvalue:.1e})")
     explain("Customer rating for each band of lateness.", "Bins turn a noisy scatter into a clear dose-response pattern.",
-            "Ratings fall steadily, from about 4.4 when on time to about 2.6 when more than two weeks late.")
+            "Ratings fall steadily, from about 4.4 when on time to about 2.5 when more than two weeks late.")
     first = o[(o.order_seq == 1) & (o.order_date < "2025-06-30")].merge(
         o[o.order_seq == 2][["customer_id", "order_date"]].rename(columns={"order_date": "d2"}), on="customer_id", how="left")
     first["came_back"] = ((first.d2 - first.order_date).dt.days <= 180)
@@ -163,7 +163,7 @@ elif page == "Delivery & Logistics":
     st.plotly_chart(px.bar(rt, x="experience", y="came_back", color="experience", color_discrete_sequence=[PAL[7], PAL[2]],
                            title="% of customers who re-order within 180 days"), use_container_width=True)
     explain("Retention after a good vs bad first order.", "Links operations (delay/returns) to customer lifetime value, the root cause of revenue stalling.",
-            "A bad first experience roughly halves the chance of a second order. This is why 2025 revenue stalled despite more digital users.")
+            "A bad first experience cuts the chance of a second order by more than a third (about 27% vs 42%). This is why 2025 revenue stalled despite more digital users.")
 
 # ================================================================ FACTORY
 elif page == "Factory Automation":
@@ -177,7 +177,7 @@ elif page == "Factory Automation":
     an = stats.f_oneway(*[p.loc[p.automation_level == l, "defect_rate_pct"] for l in lv])
     st.info(f"One-way ANOVA (defect rate across automation levels): F = {an.statistic:.0f}, p = {an.pvalue:.1e}")
     explain("Quality and labour productivity by line type.", "ANOVA tests whether the mean defect rate truly differs across more than two groups.",
-            "Fully automated lines have less than half the defects of manual lines and about 6x the output per operator.")
+            "Fully automated lines have less than half the defects of manual lines and about 7x the output per operator.")
     st.dataframe(agg.round(2), use_container_width=True)
     u = p[p.line_id.isin(["L3", "L4"])].assign(group="L3-L4 (upgraded Jul-2025)")
     c = p[p.line_id == "L5"].assign(group="L5 (control)")
@@ -229,10 +229,10 @@ elif page == "Strategy":
     st.markdown("""
 | # | Finding (evidence) | Strategy | KPI target |
 |---|---|---|---|
-| 1 | Room Visualizer users: 3.6x fewer returns, +0.35 rating, +21-42% basket within segment, 7.7x funnel conversion | Make the room upload the **default step** in every quote; give distributors a white-label version for their showrooms | Visualizer use above 75% of orders; returns below 6% |
-| 2 | Late delivery is the #1 driver of low ratings; a bad first order halves re-order rate | **Delivery promise engine**: quote dates by lane and line type, hold buffer stock in UAE, UK and US warehouses, send proactive delay alerts | On-time above 85%; 180-day re-order above 45% |
-| 3 | Automated lines: -57% defects, 6.6x sqm/operator, 18% lower cost/sqm, and better on-time delivery | Upgrade L5 and L6 next (proven by the L3-L4 diff-in-diff); route export orders to automated lines first | Defects below 1.8% factory-wide |
+| 1 | Room Visualizer users: about 3x fewer returns, +0.38 rating, +11-40% basket within segment, 7x funnel conversion | Make the room upload the **default step** in every quote; give distributors a white-label version for their showrooms | Visualizer use above 75% of orders; returns below 6% |
+| 2 | Late delivery is the #1 driver of low ratings; a bad first order cuts the 180-day re-order rate from 42% to 27% | **Delivery promise engine**: quote dates by lane and line type, hold buffer stock in UAE, UK and US warehouses, send proactive delay alerts | On-time above 85%; 180-day re-order above 45% |
+| 3 | Automated lines: -57% defects, about 7x sqm/operator, 19% lower cost/sqm, and better on-time delivery | Upgrade L5 and L6 next (proven by the L3-L4 diff-in-diff); route export orders to automated lines first | Defects below 1.8% factory-wide |
 | 4 | Kiln deviation drives defects | IoT kiln sensors with automatic alerts at +/-8 C | 0 batches outside +/-8 C |
 | 5 | Mosaic and Porcelain have the highest margin; USA, UAE and UK are the largest markets | Promote premium lines in the 7D viewer for those markets; run Oct-Mar campaigns | Premium share of revenue above 60% |
-| 6 | Trade-fair QR traffic converts best | Put 7D/AR QR codes on every sample box and at fair booths | Session to order conversion above 7% |
+| 6 | Trade-fair QR traffic converts best (8.8% of sessions) | Put 7D/AR QR codes on every sample box and at fair booths | Session to order conversion above 7% |
 """)
