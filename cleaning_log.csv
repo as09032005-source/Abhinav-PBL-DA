@@ -1,0 +1,32 @@
+dataset,issue,rows_affected,action,rationale
+orders,Exact duplicate rows,120,Dropped,Double-booked orders inflate revenue and volume.
+orders,Duplicate order_id,0,Kept first,order_id is the primary key and must be unique.
+orders,"Inconsistent country names (USA, U.K., Deutschland...)",393,Mapped to one standard name,Otherwise the same market is split into several groups in country analysis.
+orders,Tile category in UPPER CASE with trailing spaces,250,Trimmed and mapped to proper case,"Ensures 6 categories, not 12."
+orders,customer_type in lower case,200,Mapped to proper case,Consistent segment labels.
+orders,Mixed date formats (DD/MM/YYYY),400,Parsed both formats explicitly,Auto-parsing would swap day and month for dates like 03/04/2025.
+orders,unit_price_usd contains text prefix 'USD',19,"Stripped prefix, cast to float",Price must be numeric to compute revenue.
+orders,Negative quantity,25,Converted to absolute value,Sign-entry error; order exists (has price/delivery).
+orders,Rating outside 1-5 scale,12,"Set to missing, then imputed",A 7 on a 5-point scale is a data entry error.
+orders,Discount > 40% (policy cap),18,"Set to missing, then imputed",Company policy caps discounts; 95% is a typo.
+orders,Extreme quantity outliers (x40 entry error),27,Capped at 99.5th percentile within customer type,Caps per segment because a distributor legitimately buys far more than a homeowner.
+orders,Missing unit price,126,Median by category x country,Price depends mostly on product and market.
+orders,Missing discount,144,Median by customer type,Discount policy is set per customer segment.
+orders,Missing rating,138,Overall median,Median is robust to the skewed rating distribution.
+orders,Missing shipping mode,126,"Road if India, else mode (Sea Freight)",Domestic orders go by road; exports mostly by sea.
+orders,Missing dashboard time,126,Median by visualizer usage,Visualizer users spend much longer on the dashboard.
+orders,Missing actual lead time,126,Rows dropped,Delivery is the target of the logistics analysis; imputing it would invent the outcome.
+orders,Feature engineering,4945,"Added revenue, margin, delay, on_time, digital_engagement, repeat, size band, RFM",Raw columns don't directly answer business questions; derived KPIs do.
+production,Duplicate batch rows,40,Dropped,Double counts output.
+production,automation_level spelling variants,30,Standardised to 3 levels,Core grouping variable.
+production,"Kiln temp 11800 C (sensor glitch, extra zero)",10,Set to missing then imputed,Physically impossible for a ceramic kiln.
+production,Negative defect rate,8,Set to missing then imputed,A rate cannot be negative.
+production,Missing kiln_temp_c,46,Median by automation level x category,Values differ strongly by line type and product.
+production,Missing defect_rate_pct,44,Median by automation level x category,Values differ strongly by line type and product.
+production,Missing energy_kwh,36,Median by automation level x category,Values differ strongly by line type and product.
+production,Feature engineering,1800,"Added good output, energy/sqm, sqm/operator, OEE proxy",Standard manufacturing KPIs.
+sessions,Duplicate sessions,80,Dropped,Tracking double-fire.
+sessions,Zero-duration sessions (bots/bounces),43,Dropped,Would distort conversion rates.
+sessions,Missing device,240,Labelled 'Unknown',Keeps the session for funnel totals without guessing.
+sessions,Missing traffic_source,240,Labelled 'Unknown',Keeps the session for funnel totals without guessing.
+sessions,Missing duration,239,Median by tool usage,Tool users have longer sessions.

@@ -1,0 +1,408 @@
+{
+  "kpis": {
+    "orders": 4945,
+    "customers": 1945,
+    "countries": 14,
+    "net_revenue_usd": 110453999,
+    "gross_margin_pct": 45.8,
+    "avg_order_value_usd": 22337,
+    "export_share_revenue_pct": 88.4,
+    "on_time_pct": 52.7,
+    "return_rate_pct": 9.4,
+    "avg_rating": 4.29,
+    "repeat_order_share_pct": 61.3,
+    "avg_defect_pct": 2.37,
+    "revenue_2024": 56333551,
+    "revenue_2025": 54120448,
+    "yoy_growth_pct": -3.9
+  },
+  "descriptive_stats": {
+    "quantity_sqm": {
+      "count": 4945.0,
+      "mean": 1531.16,
+      "std": 3015.48,
+      "min": 18.6,
+      "25%": 178.3,
+      "50%": 840.4,
+      "75%": 2114.1,
+      "max": 73302.48
+    },
+    "unit_price_usd": {
+      "count": 4945.0,
+      "mean": 15.96,
+      "std": 9.42,
+      "min": 5.15,
+      "25%": 9.19,
+      "50%": 12.24,
+      "75%": 20.36,
+      "max": 50.65
+    },
+    "discount_pct": {
+      "count": 4945.0,
+      "mean": 7.1,
+      "std": 3.95,
+      "min": 0.0,
+      "25%": 4.0,
+      "50%": 7.0,
+      "75%": 10.0,
+      "max": 20.3
+    },
+    "net_revenue_usd": {
+      "count": 4945.0,
+      "mean": 22336.5,
+      "std": 45013.49,
+      "min": 115.58,
+      "25%": 2420.89,
+      "50%": 10095.25,
+      "75%": 27311.56,
+      "max": 1203707.35
+    },
+    "margin_pct": {
+      "count": 4945.0,
+      "mean": 43.57,
+      "std": 10.42,
+      "min": 5.37,
+      "25%": 36.4,
+      "50%": 44.53,
+      "75%": 51.67,
+      "max": 67.19
+    },
+    "delay_days": {
+      "count": 4945.0,
+      "mean": 0.7,
+      "std": 3.14,
+      "min": -2.5,
+      "25%": -1.5,
+      "50%": -0.2,
+      "75%": 1.8,
+      "max": 32.8
+    },
+    "damage_pct": {
+      "count": 4945.0,
+      "mean": 1.2,
+      "std": 0.6,
+      "min": 0.0,
+      "25%": 0.78,
+      "50%": 1.18,
+      "75%": 1.58,
+      "max": 3.75
+    },
+    "customer_rating": {
+      "count": 4945.0,
+      "mean": 4.29,
+      "std": 0.58,
+      "min": 1.0,
+      "25%": 4.0,
+      "50%": 4.5,
+      "75%": 4.5,
+      "max": 5.0
+    },
+    "dashboard_time_min": {
+      "count": 4945.0,
+      "mean": 9.69,
+      "std": 8.48,
+      "min": 0.0,
+      "25%": 3.8,
+      "50%": 7.2,
+      "75%": 13.0,
+      "max": 73.2
+    }
+  },
+  "monthly_peak": "2024-10",
+  "season_share_oct_mar_pct": 60.9,
+  "top_countries": {
+    "United States": 19.85,
+    "India": 12.85,
+    "UAE": 11.54,
+    "United Kingdom": 9.42,
+    "Australia": 9.16
+  },
+  "category": {
+    "rev": {
+      "Ceramic Wall": 9305974.3,
+      "Ceramic Floor": 10337990.3,
+      "Outdoor / Anti-skid": 10670965.1,
+      "Porcelain Slab": 25391600.0,
+      "Vitrified (GVT)": 26370621.8,
+      "Designer Mosaic": 28376847.3
+    },
+    "margin_pct": {
+      "Ceramic Wall": 39.3,
+      "Ceramic Floor": 41.4,
+      "Outdoor / Anti-skid": 43.6,
+      "Porcelain Slab": 47.0,
+      "Vitrified (GVT)": 44.2,
+      "Designer Mosaic": 50.8
+    }
+  },
+  "segments": {
+    "aov": {
+      "Homeowner": 1882.0,
+      "Architect/Interior Designer": 7217.0,
+      "Hotel/Commercial": 37136.0,
+      "Builder/Contractor": 26314.0,
+      "Distributor/Dealer": 54128.0
+    },
+    "orders": {
+      "Homeowner": 1428,
+      "Architect/Interior Designer": 934,
+      "Hotel/Commercial": 564,
+      "Builder/Contractor": 1050,
+      "Distributor/Dealer": 969
+    },
+    "rev": {
+      "Homeowner": 2688160.0,
+      "Architect/Interior Designer": 6740469.0,
+      "Hotel/Commercial": 20944712.0,
+      "Builder/Contractor": 27630211.0,
+      "Distributor/Dealer": 52450446.0
+    }
+  },
+  "order_value_skew": 12.96,
+  "top_correlations": {
+    "quantity_sqm ~ net_revenue_usd": 0.88,
+    "used_room_visualizer ~ visualizer_renders": 0.84,
+    "unit_price_usd ~ margin_pct": 0.54,
+    "returned ~ customer_rating": -0.45,
+    "delay_days ~ customer_rating": -0.45,
+    "visualizer_renders ~ dashboard_time_min": 0.41,
+    "used_room_visualizer ~ dashboard_time_min": 0.4,
+    "quantity_sqm ~ discount_pct": 0.37,
+    "used_7d_view ~ visualizer_renders": 0.35,
+    "discount_pct ~ net_revenue_usd": 0.34
+  },
+  "digital_impact": {
+    "table": {
+      "aov": {
+        "No digital tool": 24132.15,
+        "7D View only": 21850.725,
+        "7D + Room Visualizer": 20933.959
+      },
+      "returns": {
+        "No digital tool": 0.157,
+        "7D View only": 0.077,
+        "7D + Room Visualizer": 0.044
+      },
+      "rating": {
+        "No digital tool": 4.12,
+        "7D View only": 4.281,
+        "7D + Room Visualizer": 4.469
+      },
+      "n": {
+        "No digital tool": 1769,
+        "7D View only": 1394,
+        "7D + Room Visualizer": 1782
+      }
+    },
+    "aov_uplift_room_vs_none_pct": -13.3,
+    "welch_t_log_aov": {
+      "t": -7.34,
+      "p": 2.66e-13
+    },
+    "chi2_returns": {
+      "chi2": 140.99,
+      "p": 2.43e-31
+    },
+    "kruskal_rating": {
+      "H": 332.03,
+      "p": 7.94e-73
+    }
+  },
+  "adoption": {
+    "used_7d_view": {
+      "2024Q1": 28.1,
+      "2024Q2": 33.4,
+      "2024Q3": 42.4,
+      "2024Q4": 48.5,
+      "2025Q1": 54.5,
+      "2025Q2": 56.7,
+      "2025Q3": 64.5,
+      "2025Q4": 72.1
+    },
+    "used_room_visualizer": {
+      "2024Q1": 0.0,
+      "2024Q2": 0.0,
+      "2024Q3": 36.3,
+      "2024Q4": 42.8,
+      "2025Q1": 44.3,
+      "2025Q2": 53.2,
+      "2025Q3": 52.0,
+      "2025Q4": 56.9
+    }
+  },
+  "funnel": {
+    "table": {
+      "sessions": {
+        "Browse only": 5478,
+        "7D only": 3966,
+        "7D + Room upload": 2513
+      },
+      "quote": {
+        "Browse only": 0.0655,
+        "7D only": 0.1533,
+        "7D + Room upload": 0.304
+      },
+      "order": {
+        "Browse only": 0.0188,
+        "7D only": 0.057,
+        "7D + Room upload": 0.1441
+      }
+    },
+    "chi2_order": {
+      "chi2": 496.4,
+      "p": 1.63e-108
+    },
+    "lift_room_vs_browse_x": 7.7
+  },
+  "source_conversion_pct": {
+    "Unknown": 3.33,
+    "Google Search": 5.19,
+    "LinkedIn": 5.24,
+    "Referral": 5.49,
+    "Direct": 5.77,
+    "Instagram": 5.96,
+    "Trade Fair QR": 8.39
+  },
+  "delay_by_mode": {
+    "mean": {
+      "Air Freight": 0.02,
+      "Road": 0.02,
+      "Sea Freight": 0.92
+    },
+    "50%": {
+      "Air Freight": -0.7,
+      "Road": -0.6,
+      "Sea Freight": 0.0
+    },
+    "75%": {
+      "Air Freight": 1.3,
+      "Road": 1.2,
+      "Sea Freight": 2.0
+    },
+    "max": {
+      "Air Freight": 11.5,
+      "Road": 10.5,
+      "Sea Freight": 32.8
+    }
+  },
+  "on_time_matrix": {
+    "Fully Automated": {
+      "Road": 67.9,
+      "Air Freight": 66.7,
+      "Sea Freight": 56.6
+    },
+    "Semi/Manual": {
+      "Road": 45.9,
+      "Air Freight": 49.1,
+      "Sea Freight": 41.0
+    }
+  },
+  "chi2_ontime_automation": {
+    "chi2": 133.1,
+    "p": 8.81e-31
+  },
+  "delay_rating": {
+    "table": {
+      "rating": {
+        "On time/early": 4.43,
+        "1-3 late": 4.31,
+        "4-7 late": 3.95,
+        "8-14 late": 3.49,
+        ">14 late": 2.61
+      },
+      "n": {
+        "On time/early": 2606,
+        "1-3 late": 1590,
+        "4-7 late": 527,
+        "8-14 late": 187,
+        ">14 late": 35
+      }
+    },
+    "spearman_rho": -0.307,
+    "p": 4.39e-108
+  },
+  "automation": {
+    "table": {
+      "defect_rate_pct": {
+        "Manual": 3.76,
+        "Semi-Automated": 2.56,
+        "Fully Automated": 1.63
+      },
+      "sqm_per_operator": {
+        "Manual": 171.01,
+        "Semi-Automated": 401.95,
+        "Fully Automated": 1161.13
+      },
+      "downtime_hours": {
+        "Manual": 3.94,
+        "Semi-Automated": 2.51,
+        "Fully Automated": 1.44
+      },
+      "energy_per_sqm": {
+        "Manual": 1.89,
+        "Semi-Automated": 1.89,
+        "Fully Automated": 1.67
+      },
+      "cost_per_sqm_usd": {
+        "Manual": 8.3,
+        "Semi-Automated": 7.5,
+        "Fully Automated": 6.83
+      },
+      "oee_proxy_pct": {
+        "Manual": 80.43,
+        "Semi-Automated": 87.24,
+        "Fully Automated": 92.48
+      }
+    },
+    "anova_defect": {
+      "F": 1048.5,
+      "p": 1.77e-302
+    }
+  },
+  "did": {
+    "upgraded_pre": 2.58,
+    "upgraded_post": 1.62,
+    "control_pre": 2.56,
+    "control_post": 2.49,
+    "did_effect_pp": -0.88
+  },
+  "kiln_dev_defect_corr": 0.266,
+  "rating_model": {
+    "r2": 0.267,
+    "std_coefs": {
+      "delay_days": -0.261,
+      "unit_price_usd": -0.013,
+      "discount_pct": -0.006,
+      "damage_pct": -0.005,
+      "is_sea": 0.007,
+      "used_7d_view": 0.063,
+      "used_room_visualizer": 0.122
+    }
+  },
+  "within_segment_aov_uplift_pct": {
+    "Hotel/Commercial": 20.6,
+    "Distributor/Dealer": 22.9,
+    "Homeowner": 29.8,
+    "Builder/Contractor": 37.0,
+    "Architect/Interior Designer": 41.9
+  },
+  "homeowner_share_by_engagement_pct": {
+    "No digital tool": 19.8,
+    "7D View only": 27.8,
+    "7D + Room Visualizer": 38.8
+  },
+  "retention": {
+    "by_experience_pct": {
+      "Bad (late >5d or return)": 23.3,
+      "Good": 44.1
+    },
+    "by_tool_pct": {
+      "No digital tool": 38.5,
+      "7D View only": 41.0,
+      "7D + Room Visualizer": 42.2
+    },
+    "chi2": 49.0,
+    "p": 2.61e-12,
+    "cohort_size": 1735
+  }
+}
